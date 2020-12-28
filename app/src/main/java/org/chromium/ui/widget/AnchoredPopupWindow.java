@@ -9,7 +9,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;

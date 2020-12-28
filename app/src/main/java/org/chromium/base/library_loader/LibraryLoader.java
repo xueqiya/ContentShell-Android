@@ -13,8 +13,8 @@ import android.os.Build.VERSION_CODES;
 import android.os.Process;
 import android.os.StrictMode;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import android.system.Os;
 
 import org.chromium.base.AsyncTask;

@@ -10,7 +10,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.LocaleList;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 import android.view.textclassifier.TextClassification;
 import android.view.textclassifier.TextClassificationManager;
 import android.view.textclassifier.TextClassifier;

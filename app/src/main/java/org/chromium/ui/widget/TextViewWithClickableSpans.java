@@ -7,7 +7,7 @@ package org.chromium.ui.widget;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
+import androidx.annotation.CallSuper;
 import android.text.Layout;
 import android.text.SpannableString;
 import android.text.style.ClickableSpan;

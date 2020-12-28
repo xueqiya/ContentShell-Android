@@ -4,8 +4,8 @@
 
 package org.chromium.content_public.browser;
 
-import android.support.annotation.IntDef;
-import android.support.annotation.Nullable;
+import androidx.annotation.IntDef;
+import androidx.annotation.Nullable;
 
 import org.chromium.blink.mojom.ViewportFit;
 

@@ -4,7 +4,7 @@
 
 package org.chromium.ui.text;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.SpannableString;
 
 import java.util.Arrays;

@@ -4,7 +4,7 @@
 
 package org.chromium.ui;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 
 import org.chromium.base.Callback;

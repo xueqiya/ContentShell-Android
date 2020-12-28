@@ -6,7 +6,7 @@ package org.chromium.content.browser.selection;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.textclassifier.TextClassification;
 import android.view.textclassifier.TextSelection;
 

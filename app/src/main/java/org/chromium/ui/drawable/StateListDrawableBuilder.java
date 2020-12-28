@@ -11,8 +11,9 @@ import android.graphics.drawable.AnimatedStateListDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
-import android.support.annotation.DrawableRes;
-import android.support.v7.content.res.AppCompatResources;
+
+import androidx.annotation.DrawableRes;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,8 @@ import java.util.List;
 public class StateListDrawableBuilder {
     /** Identifies single state of the drawable. Used by {@link #addTransition}. */
     public static class State {
-        private final @DrawableRes int mDrawable;
+        private final @DrawableRes
+        int mDrawable;
         private final int[] mStateSet;
         private final int mStateId;
 
