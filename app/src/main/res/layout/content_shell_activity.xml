@@ -6,9 +6,24 @@
      found in the LICENSE file.
  -->
 
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <org.chromium.content_shell.ShellManager
         android:id="@+id/shell_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</merge>
+</androidx.appcompat.widget.LinearLayoutCompat>

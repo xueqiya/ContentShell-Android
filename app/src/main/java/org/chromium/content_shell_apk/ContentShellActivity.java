@@ -4,14 +4,19 @@
 
 package org.chromium.content_shell_apk;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import org.chromium.LogUtils;
 import org.chromium.base.CommandLine;
 import org.chromium.base.MemoryPressureListener;
 import org.chromium.base.library_loader.LibraryLoader;
@@ -27,7 +32,7 @@ import org.chromium.ui.base.ActivityWindowAndroid;
 /**
  * Activity for managing the Content Shell.
  */
-public class ContentShellActivity extends Activity {
+public class ContentShellActivity extends AppCompatActivity {
 
     private static final String TAG = "ContentShellActivity";
 
@@ -75,8 +80,7 @@ public class ContentShellActivity extends Activity {
         mShellManager.setWindow(mWindowAndroid);
         // Set up the animation placeholder to be the SurfaceView. This disables the
         // SurfaceView's 'hole' clipping during animations that are notified to the window.
-        mWindowAndroid.setAnimationPlaceholderView(
-                mShellManager.getContentViewRenderView().getSurfaceView());
+        mWindowAndroid.setAnimationPlaceholderView(mShellManager.getContentViewRenderView().getSurfaceView());
 
         mStartupUrl = getUrlFromIntent(getIntent());
         if (!TextUtils.isEmpty(mStartupUrl)) {
@@ -84,14 +88,16 @@ public class ContentShellActivity extends Activity {
         }
 
         if (CommandLine.getInstance().hasSwitch(RUN_WEB_TESTS_SWITCH)) {
+            LogUtils.d("startBrowserProcessesSync");
             try {
                 BrowserStartupController.get(LibraryProcessType.PROCESS_BROWSER)
-                        .startBrowserProcessesSync(false);
+                        .startBrowserProcessesSync(true);
             } catch (ProcessInitException e) {
                 Log.e(TAG, "Failed to load native library.", e);
                 System.exit(-1);
             }
         } else {
+            LogUtils.d("startBrowserProcessesAsync");
             try {
                 BrowserStartupController.get(LibraryProcessType.PROCESS_BROWSER)
                         .startBrowserProcessesAsync(
@@ -111,6 +117,48 @@ public class ContentShellActivity extends Activity {
                 System.exit(-1);
             }
         }
+        initToolbar();
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_control, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add:
+                mShellManager.launchShell(ShellManager.DEFAULT_SHELL_URL);
+                break;
+            case R.id.add_incognito:
+                break;
+            case R.id.dele:
+                break;
+            case R.id.back:
+                break;
+            case R.id.forward:
+                break;
+            case R.id.reload:
+                break;
+            case R.id.home:
+                break;
+            case R.id.tab0:
+                break;
+            case R.id.tab1:
+                break;
+            case R.id.tab2:
+                break;
+            case R.id.tab3:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void finishInitialization(Bundle savedInstanceState) {
@@ -162,6 +210,7 @@ public class ContentShellActivity extends Activity {
 
     @Override
     protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
         if (getCommandLineParamsFromIntent(intent) != null) {
             Log.i(TAG, "Ignoring command line params: can only be set when creating the activity.");
         }
@@ -217,7 +266,7 @@ public class ContentShellActivity extends Activity {
 
     /**
      * @return The {@link ShellManager} configured for the activity or null if it has not been
-     *         created yet.
+     * created yet.
      */
     public ShellManager getShellManager() {
         return mShellManager;
@@ -232,11 +281,10 @@ public class ContentShellActivity extends Activity {
 
     /**
      * @return The {@link WebContents} owned by the currently visible {@link Shell} or null if
-     *         one is not showing.
+     * one is not showing.
      */
     public WebContents getActiveWebContents() {
         Shell shell = getActiveShell();
         return shell != null ? shell.getWebContents() : null;
     }
-
 }
